@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csust.onlineexam.mapper.StudentUserExMapper">
+    <resultMap id="BaseResultMap" type="com.csust.onlineexam.entity.Student">
+        <id column="student_no" jdbcType="VARCHAR" property="studentNo" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="sex" jdbcType="BIT" property="sex" />
+        <result column="phone" jdbcType="CHAR" property="phone" />
+        <result column="class_id" jdbcType="INTEGER" property="classId"/>
+        <result column="class_name" jdbcType="VARCHAR" property="className"/>
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName"/>
+        <result column="school_name" jdbcType="VARCHAR" property="schoolName"/>
+    </resultMap>
+
+    <select id="getUserInfo" resultMap="BaseResultMap">
+        select student_no, name, sex, phone,class_name,school_name
+            from student_table as st, class_table as c, department_table as d, school_table as sc
+            where st.class_id = c.class_id and c.department_id=d.department_id
+            and d.school_code = sc.school_code
+    </select>
+
+
+</mapper>
