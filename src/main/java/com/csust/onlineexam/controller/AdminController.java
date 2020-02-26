@@ -168,7 +168,8 @@ public class AdminController {
     @ResponseBody
     public int updateNode(@RequestParam("id") int id,
                           @RequestParam("type") int type,
-                          @RequestParam("name") String name){
+                          @RequestParam("name") String name,
+                          @RequestParam(value = "chassNo", required = false) String classNo){
         int code = 0;
         //更新学院名称
         if(type == 1){
@@ -186,6 +187,7 @@ public class AdminController {
             ClassInfo classInfo = new ClassInfo();
             classInfo.setClassId(id);
             classInfo.setClassName(name);
+            classInfo.setClassNo(classNo);
             classInfoMapper.updateByPrimaryKeySelective(classInfo);
         }
         return code;
